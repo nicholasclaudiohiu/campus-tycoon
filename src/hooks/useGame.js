@@ -291,8 +291,16 @@ export function useGame() {
       const afterH = H(minutes).h;
 
       let flags = { ...g.flags };
-      if (crossedHour(beforeH, afterH, 10)) {
-        flags.checkin = false;
+      if (flags.checkin && flags.checkinDay !== null) {
+        if (day > flags.checkinDay && crossedHour(beforeH, afterH, 10)) {
+          flags.checkin = false;
+          flags.checkinDay = null;
+          toast('Check-in hotel telah berakhir');
+        }
+        if (day > flags.checkinDay && afterH >= 10) {
+          flags.checkin = false;
+          flags.checkinDay = null;
+        }
       }
 
       let happiness = g.happiness;
@@ -321,7 +329,6 @@ export function useGame() {
 
       // handle rolling to next day: if day changed, reset daily counters
       if (day !== g.day) {
-        newGame.flags = { checkin: false };
         newGame.counters = { mandi: 0, makan: 0, barista: 0, kasir: 0, kerjaRumah: 0 };
         newGame.daily = { attendedKuliah: false };
       }

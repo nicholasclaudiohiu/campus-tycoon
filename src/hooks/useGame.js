@@ -385,14 +385,22 @@ export function useGame() {
 
   // doActivity (applies effects) - can be instant or animated
   const doActivity = (key, fastForward = false) => {
-    const list = LOCATIONS[game.currentLoc] || [];
-    const act = list.find(a => a.key === key);
-    if (!act) return;
-    const chk = timeAllowed(act);
-    if (!chk.ok) {
-      toast(chk.msg);
-      return;
-    }
+
+  // ⛔ Prevent double-activity
+  if (game.activeActivity) {
+    toast("Tunggu aktivitas selesai dulu!");
+    return;
+  }
+
+  const list = LOCATIONS[game.currentLoc] || [];
+  const act = list.find(a => a.key === key);
+  if (!act) return;
+
+  const chk = timeAllowed(act);
+  if (!chk.ok) {
+    toast(chk.msg);
+    return;
+  }
 
     // Handle item purchases - add to inventory directly
     if (act.type === 'item' && act.itemId) {

@@ -753,7 +753,7 @@
   @media(min-width:769px) and (max-width:1024px){
     .world{
       width:100%;
-      max-width:650px;
+      max-width:950px;
       height:0;
       padding-bottom:69.81%;
       background-size:contain;
@@ -819,6 +819,23 @@
   height: auto;
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 1068px) {
+  .inventory-modal {
+    width: 80vw;       /* fleksibel mengikuti layar */
+    border-radius: 14px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .inventory-modal {
+    width: 92vw;       /* hampir penuh layar */
+    max-width: none;
+    border-radius: 12px;
+    padding: 8px;
+  }
 }
 
 .inventory-header {
@@ -908,6 +925,27 @@
   line-height: 1.2;
 }
 
+@media (max-width: 1068px) {
+  .item-icon {
+    font-size: 60px;
+  }
+
+  .item-name {
+    font-size: 20px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .item-icon{
+    font-size: 14px;
+  }
+
+  .item-name {
+    font-size: 10px;
+  }
+}
+
 .item-effects-inline {
   display: none;
 }
@@ -975,7 +1013,7 @@
 }
 
 .item-icon-large {
-  font-size: 48px;
+  font-size: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
